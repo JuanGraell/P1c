@@ -1,3 +1,4 @@
+# Librerías
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
@@ -14,16 +15,22 @@ import copy
 import matplotlib.pyplot as plt
 from tkinter import filedialog
 
-
 # Funciones de ejemplo para las opciones
 def volver_a_principal():
+    """
+    Clears the frame, updates the content label, and packs the top bar and About button.
+    """
     limpiar_frame()
     contenido_label.config(text="Análisis de probabilidades")
     barra_superior.pack(side=tk.TOP, fill=tk.X)
 
     About_Button.pack(side=tk.LEFT)
-
+# Funcion para la opcion 1
 def opcion1():
+    """
+    Function to handle option 1.
+    Clears the frame, updates the label text, and adds buttons for matrix input and loading.
+    """
     limpiar_frame()
     contenido_label.config(text="Ingreso de matrices")
     barra_superior.pack(side=tk.TOP, fill=tk.X)
@@ -33,9 +40,12 @@ def opcion1():
 
     Cargar_Button = tk.Button(barra_superior, text="Cargar matriz", bg="#332F2C", fg="white", padx=5, pady=5, font=('Helvetica', 10), command=Cargar_B)
     Cargar_Button.pack(side=tk.LEFT)  # Alinear a la izquierda
-
-
+# Funcion para la opcion 2
 def opcion2():
+    """
+    Function to handle option 2.
+    Clears the frame, updates the label, and adds buttons for matrix analysis.
+    """
     limpiar_frame()
     contenido_label.config(text="Análisis de matrices asociadas")
     barra_superior.pack(side=tk.TOP, fill=tk.X)
@@ -47,10 +57,13 @@ def opcion2():
     Matriz_CanalE_Button.pack(side=tk.LEFT)  # Alinear a la izquierda    
 
     Matriz_EstadoE_Button = tk.Button(barra_superior, text="Matriz Estado-Estado", bg="#332F2C", fg="white", padx=5, pady=5, font=('Helvetica', 10),command=MatrizE_B)
-    Matriz_EstadoE_Button.pack(side=tk.LEFT)  # Alinear a la izquierda    
-
-
+    Matriz_EstadoE_Button.pack(side=tk.LEFT)  # Alinear a la izquierda
+# Funcion para la opcion 3
 def opcion3():
+    """
+    Function to handle option 3.
+    Clears the frame, updates the label text, and adds buttons for entering matrix state, marginalizing, and viewing a graph.
+    """
     limpiar_frame()
     contenido_label.config(text="Visualización y probabilidades")
     barra_superior.pack(side=tk.TOP, fill=tk.X)
@@ -62,9 +75,20 @@ def opcion3():
     Marginalizar_Button.pack(side=tk.LEFT)  # Alinear a la izquierda    
 
     Grafica_Button = tk.Button(barra_superior, text="Ver Gráfica", bg="#332F2C", fg="white", padx=5, pady=5, font=('Helvetica', 10),command=Grafica_B)
-    Grafica_Button.pack(side=tk.LEFT)  # Alinear a la izquierda    
-
+    Grafica_Button.pack(side=tk.LEFT)  # Alinear a la izquierda
+# Funcion para la opcion 4
 def opcion4():
+    """
+    Function to handle Option 4.
+
+    This function clears the frame, updates the content label, and adds buttons for various actions.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     limpiar_frame()
     contenido_label.config(text="Distancia EMD")
     barra_superior.pack(side=tk.TOP, fill=tk.X)
@@ -80,11 +104,17 @@ def opcion4():
 
     GraficaG_Button = tk.Button(barra_superior, text="Gráfica Ganadora", bg="#332F2C", fg="white", padx=5, pady=5, font=('Helvetica', 10),command=GraficaG_B)
     GraficaG_Button.pack(side=tk.LEFT)  # Alinear a la izquierda
-
+# Funcion para la opcion 5
 def salir_del_programa():
+    """
+    Closes the main window of the program.
+    """
     ventana_principal.destroy()
-
+# Funcion que limpia el frame
 def limpiar_frame():
+    """
+    Clears the contents of the frame_trabajo and barra_superior widgets.
+    """
     for widget in frame_trabajo.winfo_children():
         widget.pack_forget()
         widget.place_forget()
@@ -94,19 +124,37 @@ def limpiar_frame():
         widget.pack_forget()
         widget.place_forget()
         widget.grid_forget()
-
+# Funcion que limpia el frame tipo Tr
 def limpiar_frameTr():
+    """
+    Clears all the widgets inside the frame_trabajo.
+    """
     for widget in frame_trabajo.winfo_children():
         widget.pack_forget()
         widget.place_forget()
         widget.grid_forget()
-
+# Lista para canales
 channels=[]
-
+# Función que implementa el about
 def aboutB():
+    """
+    Display information about the project and its members.
+    """
     messagebox.showinfo("Acerca de", "Proyecto - Análisis\n\nIntegrantes:\n\n- Juan Esteban Graell Alzate\n- Juan Camilo Toro Palacio\n\n Presentado a: Luz Enith Guerrero Mendietai")
-
+# Función que imprime las tablas
 def imprimir_tabla(matriz):
+    """
+    Imprime una tabla en la interfaz gráfica con los datos de una matriz.
+
+    Args:
+        matriz (list): La matriz de datos a mostrar en la tabla.
+
+    Raises:
+        ValueError: Si la matriz está vacía.
+
+    Returns:
+        None
+    """
     try:
         if len(matriz) > 0:  # Asegurarse de que la matriz no esté vacía
             limpiar_frameTr()
@@ -142,9 +190,18 @@ def imprimir_tabla(matriz):
         root.withdraw()  # Para evitar que se muestre la ventana Tk vacía
         messagebox.showerror("Error", str(e))
         root.destroy()
-
-
+# Función que imprime las tablas tipo CS
 def imprimir_tablaCS(matriz):
+    """
+    Imprime una tabla en la interfaz gráfica con los datos de una matriz.
+
+    Args:
+        matriz (list): La matriz de datos a imprimir en la tabla.
+
+    Raises:
+        ValueError: Si la matriz está vacía.
+
+    """
     try:
         if len(matriz) > 0:  # Asegurarse de que la matriz no esté vacía
             limpiar_frameTr()
@@ -175,14 +232,23 @@ def imprimir_tablaCS(matriz):
         root.withdraw()  # Para evitar que se muestre la ventana Tk vacía
         messagebox.showerror("Error", str(e))
         root.destroy()
-
+# Función que imprime las tablas tipo S
 def imprimir_tablaS(matriz):
+    """
+    Imprime una tabla en la interfaz gráfica con los datos de una matriz.
+
+    Args:
+        matriz (list): La matriz de datos a imprimir en la tabla.
+
+    Raises:
+        ValueError: Si la matriz está vacía.
+
+    """
     try:
         if len(matriz) > 0:  # Asegurarse de que la matriz no esté vacía
             limpiar_frameTr()
             filas = len(matriz)
             columnas = len(matriz[0])
-
 
             # Crear etiquetas para las columnas
             for j in range(columnas):
@@ -208,10 +274,21 @@ def imprimir_tablaS(matriz):
         root.withdraw()  # Para evitar que se muestre la ventana Tk vacía
         messagebox.showerror("Error", str(e))
         root.destroy()
-
-
+# Función que carga los archivos
 def loadFromFile(file_path):
+    """
+    Load data from a file.
 
+    Args:
+        file_path (str): The path to the file.
+
+    Returns:
+        list: The loaded data as a matrix.
+
+    Raises:
+        FileNotFoundError: If the file is not found.
+
+    """
     _, file_extension = os.path.splitext(file_path)
     try:
         if file_extension == '.txt':
@@ -239,9 +316,17 @@ def loadFromFile(file_path):
     except FileNotFoundError:
         messagebox.showerror("Error", f"El archivo {file_path} no se encontró. Asegúrate de que el archivo exista y vuelva a intentarlo.")
         return None
-
-
+# Función que ayuda a cargar los archivos desde el explorador
 def abrir_explorador_y_cargar_archivo():
+    """
+    Opens a file dialog to select a file and loads its contents into a matrix.
+
+    Returns:
+        matrix (list): A matrix containing the contents of the selected file.
+
+    Raises:
+        FileNotFoundError: If the selected file is not found.
+    """
     file_path = filedialog.askopenfilename(filetypes=[("Text files", "*.txt"), 
                                                       ("Excel files", "*.xlsx"), 
                                                       ("Word files", "*.docx"), 
@@ -277,10 +362,21 @@ def abrir_explorador_y_cargar_archivo():
     else:
         messagebox.showerror("Error", "No se seleccionó ningún archivo.")
         return None
-
-
+# Función que carga los archivos solo para la matriz estado
 def loadFromFileMatrixE(file_path):
+    """
+    Load a matrix from a file.
 
+    Args:
+        file_path (str): The path to the file.
+
+    Returns:
+        list: The loaded matrix.
+
+    Raises:
+        FileNotFoundError: If the file is not found.
+
+    """
     _, file_extension = os.path.splitext(file_path)
     try:
         if file_extension == '.txt':
@@ -319,9 +415,17 @@ def loadFromFileMatrixE(file_path):
     except FileNotFoundError:
         messagebox.showerror("Error", f"El archivo {file_path} no se encontró. Asegúrate de que el archivo exista y vuelva a intentarlo.")
         return None
-
-
+# Función que ayuda a cargar los archivos desde el explorador solo para la matriz estado
 def abrir_explorador_y_cargar_archivoMatrixE():
+    """
+    Opens a file dialog to select a file and loads the contents of the file into a matrix.
+
+    Returns:
+        matrix (list): The matrix containing the loaded data.
+
+    Raises:
+        FileNotFoundError: If the selected file is not found.
+    """
     file_path = filedialog.askopenfilename(filetypes=[("Excel files", "*.xlsx")])
     if file_path:
         _, file_extension = os.path.splitext(file_path)
@@ -366,9 +470,19 @@ def abrir_explorador_y_cargar_archivoMatrixE():
     else:
         messagebox.showerror("Error", "No se seleccionó ningún archivo.")
         return None
-
-
+# Función que crea los canales
 def create_channels():
+    """
+    Creates channels based on the data entered in a table.
+
+    Returns:
+    - datos_tabla (list): A list containing the data entered in the table.
+
+    Raises:
+    - ValueError: If the input in the table is empty or not an integer.
+    - messagebox.showerror: If the input in the table is negative.
+
+    """
     global channels
     datos_tabla = []
     for i in range(filasM):  # Comenzar desde 1 para evitar los títulos de las filas
@@ -388,10 +502,18 @@ def create_channels():
     messagebox.showinfo("Éxito", "Matriz insertada exitosamente.")
     volver_a_principal()
     return datos_tabla
-
-
+# Función que crea tablas
 def crear_tabla(filas,columnas):
+    """
+    Crea una tabla en la interfaz gráfica con el número de filas y columnas especificadas.
 
+    Args:
+        filas (int): El número de filas de la tabla.
+        columnas (int): El número de columnas de la tabla.
+
+    Returns:
+        None
+    """
     global filasM, columnasM, frame_trabajo, tablaM
     filasM = int(filas)
     columnasM = int(columnas)
@@ -421,10 +543,18 @@ def crear_tabla(filas,columnas):
 
     crearM_Button=tk.Button(frame_trabajo, text="Ingresar", bg="#332F2C", fg="white", padx=5, pady=5, font=('Helvetica', 15),command=create_channels)
     crearM_Button.place(relx=0.5,rely=0.9, anchor="center")
-
-
+# Función que crea tablas tipo M
 def crear_tablaM(filas,columnas):
+    """
+    Crea una tabla en la interfaz gráfica con el número de filas y columnas especificadas.
 
+    Args:
+        filas (int): El número de filas de la tabla.
+        columnas (int): El número de columnas de la tabla.
+
+    Returns:
+        None
+    """
     global filasM, columnasM, frame_trabajo, tablaM
     filasM = int(filas)
     columnasM = int(columnas)
@@ -459,10 +589,17 @@ def crear_tablaM(filas,columnas):
 
     crearM_Button=tk.Button(frame_trabajo, text="Ingresar", bg="#332F2C", fg="white", padx=5, pady=5, font=('Helvetica', 15),command=create_channels)
     crearM_Button.place(relx=0.5,rely=1, anchor="center")
-
-
 # Función para invertir una matriz
 def invertMatrix(matrix):
+    """
+    Inverts the given matrix by transposing its rows and columns.
+
+    Args:
+        matrix (list): The matrix to be inverted.
+
+    Returns:
+        list: The inverted matrix.
+    """
     invertedMatrix = []
     for i in range(len(matrix[0])):
         temp = []
@@ -470,9 +607,17 @@ def invertMatrix(matrix):
             temp.append(matrix[j][i])
         invertedMatrix.append(temp)
     return invertedMatrix
-
 # Función para crear una matriz de estados
 def createStateMatrix(matrix):
+    """
+    Create a state matrix based on the given matrix.
+
+    Args:
+        matrix (list): The input matrix.
+
+    Returns:
+        list: The state matrix.
+    """
     stateMatrix = []
     times = 0
 
@@ -486,9 +631,17 @@ def createStateMatrix(matrix):
         stateMatrix.append(state)
         times += 1
     return stateMatrix
-
 # Función para crear una matriz de canales
 def createChannelMatrix(matrix):
+    """
+    Creates a channel matrix based on the given matrix.
+
+    Args:
+        matrix (list): The input matrix.
+
+    Returns:
+        list: The created channel matrix.
+    """
     createdMatrix = [["Canales:"]]
 
     for i in range(len(matrix[0])):
@@ -498,17 +651,37 @@ def createChannelMatrix(matrix):
         createdMatrix.append([matrix[i], ])
 
     return createdMatrix
-
 # Función para simplificar una fracción a formato decimal
 def simplify_fraction(numerator, denominator):
+    """
+    Simplifies a fraction by dividing the numerator and denominator by their greatest common divisor.
+
+    Args:
+        numerator (int): The numerator of the fraction.
+        denominator (int): The denominator of the fraction.
+
+    Returns:
+        float or str: The simplified fraction as a decimal number with two decimal places, or "Undefined" if the denominator is zero.
+    """
     if denominator != 0:
         result = numerator / denominator
-        return math.trunc(result * 100) / 100  # Truncar a dos decimales
+        return math.trunc(result * 100) / 100  # Truncate to two decimal places
     else:
         return "Undefined"
-
-
+# Función para crear  la matriz canal estado
 def channelState(matrix):
+    """
+    Calculates the state channel matrix based on the given matrix.
+
+    Args:
+        matrix (list): The input matrix.
+
+    Returns:
+        list: The state channel matrix.
+
+    Raises:
+        ValueError: If the matrix is empty.
+    """
     try:
         if len(matrix) > 0:  # Asegurarse de que la matriz no esté vacía
             root = tk.Tk()
@@ -557,9 +730,17 @@ def channelState(matrix):
         root.withdraw()  # Para evitar que se muestre la ventana Tk vacía
         messagebox.showerror("Error", str(e))
         root.destroy()
-
-
+# Función para crear la matriz estado estado
 def stateState(matrix):
+    """
+    Calculates the state-state matrix based on the given matrix.
+
+    Args:
+        matrix (list): The input matrix.
+
+    Returns:
+        list: The state-state matrix.
+    """
     # Comprobar si la matriz está vacía
     if not matrix:
         messagebox.showerror("Error", "La matriz está vacía")
@@ -613,11 +794,29 @@ def stateState(matrix):
     # Retornar la lista que no contiene 'Estados: ...'
     
     return matrizestado
-
+# Función que genera combinaciones binarias
 def generate_binary_combinations(n):
-        return [list(p) for p in product([0, 1], repeat=n)]
+    """
+    Generate all possible binary combinations of length n.
 
+    Args:
+        n (int): The length of the binary combinations.
+
+    Returns:
+        list: A list of lists, where each inner list represents a binary combination.
+    """
+    return [list(p) for p in product([0, 1], repeat=n)]
+# Función para crear la matriz estado estado
 def createStMatrix(matrix):
+    """
+    Creates a state matrix based on the given matrix.
+
+    Args:
+        matrix (list): The input matrix.
+
+    Returns:
+        list: The created state matrix.
+    """
 
     createdMatrix = []
     phrase = "Estados: " + ("   ")
@@ -630,17 +829,32 @@ def createStMatrix(matrix):
     for i in range(len(matrix)):
         createdMatrix.append([matrix[i], ])
     return createdMatrix
-
-
 # Función para dividir una lista en tres listas
 def splitList(matrix):
+    """
+    Splits a matrix into its first title, second title, and content.
+
+    Args:
+        matrix (list): The matrix to be split.
+
+    Returns:
+        tuple: A tuple containing the first title, second title, and content.
+    """
     firstTitle = matrix[0]
     secondTitle = matrix[0]
-    content= convertContent(matrix[1:])
+    content = convertContent(matrix[1:])
     return firstTitle, secondTitle, content
-
-
+# Función para convertir el contenido de una lista
 def convertContent(matrix):
+    """
+    Converts the content of a matrix by removing the first element of each inner list and rounding the remaining elements to 2 decimal places.
+
+    Args:
+        matrix (list): The matrix to be converted.
+
+    Returns:
+        list: The converted matrix.
+    """
     newMatrixD = []
     for listO in matrix:
         newList = []
@@ -651,8 +865,18 @@ def convertContent(matrix):
         newMatrixD.append(newList)
         newList = []
     return newMatrixD
-
+# Función para convertir los estados
 def convertStates(State, Eval):
+    """
+    Converts the given State matrix based on the selected indexes in Eval.
+
+    Args:
+        State (list): The original State matrix.
+        Eval (str): A string containing the selected indexes separated by spaces.
+
+    Returns:
+        list: The new matrix with values from the original State matrix based on the selected indexes.
+    """
     newMatrix = []
     Indexes = []
     selectedIndexes = Eval
@@ -663,9 +887,18 @@ def convertStates(State, Eval):
         newMatrix.append(Indexes)
         Indexes = []
     return newMatrix
-
-
+# Función para convertir las columnas
 def convertColumns2(firstState, content):
+    """
+    Converts the columns of a 2D list by aggregating values based on the unique elements in the firstState list.
+
+    Args:
+        firstState (list): The list containing the unique elements.
+        content (list): The 2D list containing the values to be aggregated.
+
+    Returns:
+        tuple: A tuple containing the modified firstState list and the aggregated content list.
+    """
     firstStateCopy = []
     contentCopy = [[] for _ in content]
     count = 0
@@ -684,8 +917,19 @@ def convertColumns2(firstState, content):
                 rowCopy.append(round(row[count], 2))
         count += 1
     return firstStateCopy, contentCopy
-
+# Función para convertir las filas
 def convertRows2(secondState, content):
+    """
+    Converts rows of data based on the second state and content provided.
+
+    Args:
+        secondState (list): List of second states.
+        content (list): List of content.
+
+    Returns:
+        tuple: A tuple containing the updated stateCopy and contentCopy.
+
+    """
     stateCopy = []
     contentCopy = []
     count = 0
@@ -707,9 +951,19 @@ def convertRows2(secondState, content):
             contentCopy[i][j] /= div
             contentCopy[i][j] = round(contentCopy[i][j], 2)
     return stateCopy, contentCopy
-
-
+# Función para marginalizar
 def Marginalizar_MP(matrizest,Eval1, Eval2):
+    """
+    Marginalizes a given matrix based on two specified evaluations.
+
+    Parameters:
+    matrizest (list): The input matrix to be marginalized.
+    Eval1 (str): The first evaluation to be considered for marginalization.
+    Eval2 (str): The second evaluation to be considered for marginalization.
+
+    Returns:
+    list: The marginalized matrix.
+    """
     global matrix_strMr, filaAgraficarMr
     firstState, secondState, content = splitList(matrizest)
     firstState= convertStates(firstState, Eval1)
@@ -747,8 +1001,12 @@ def Marginalizar_MP(matrizest,Eval1, Eval2):
         matrizMarg.append(sublista)
 
     return(matrizMarg)
-
+# Función para graficar
 def graficar():
+    """
+    Function to plot a bar graph based on the global variables 'matrix_strMr' and 'filaAgraficarMr'.
+    If these variables are not defined, an error message is displayed.
+    """
     # Comprobar si las variables están definidas
     if 'matrix_strMr' not in globals() or 'filaAgraficarMr' not in globals():
         messagebox.showerror("Error", "Sin gráfica disponible, primero marginalizar.")
@@ -768,74 +1026,117 @@ def graficar():
 
     # Muestra el gráfico
     plt.show()
-
-    
-
-
-
 # Función para calcular las combinaciones de los estados
 def Combinations(Eval1,Eval2):
-        future= Eval1
-        actual= Eval2
-        future = list(map(int, future))
-        actual= list(map(int, actual))
-        selectedIndexes=[]
-        secondListCombinations = [list(comb) for longitud in range(1, len(actual) + 1) for comb in combinations(actual, longitud)]
-        firstListCombinations = [list(comb) for longitud in range(1, len(future) + 1) for comb in combinations(future, longitud)]
-        secondListCombinations.insert(0,[0])
-        firstListCombinations.insert(0,[0])
-        permutations = list(product(firstListCombinations, secondListCombinations))
-        half1 = permutations[:len(permutations)//2]
-        half2 = permutations[len(permutations)//2:]
-        matrix=[]
-        half2.reverse()
-        for i in range(0, len(half1)):
-            matrix.append([half1[i], half2[i]])
-        listA =[]
-        listB=[]
-        listC=[]
-        combMatrix = []
-        for row in matrix:
-                for lista in row:
-                    for tupla in lista:
-                        for index in tupla:
-                                listA.append(index)
-                        listC.append(listA)
-                        listA=[]
-                    listB.append(listC)
-                    listC=[]
-                combMatrix.append(listB)
-                listB=[]
-        selectedIndexes.append(future)
-        selectedIndexes.append(actual)
-        return combMatrix, selectedIndexes
+    """
+    Generate combinations of elements from two lists.
 
+    Args:
+        Eval1 (list): The first list of elements.
+        Eval2 (list): The second list of elements.
+
+    Returns:
+        tuple: A tuple containing the combination matrix and the selected indexes.
+    """
+    future= Eval1
+    actual= Eval2
+    future = list(map(int, future))
+    actual= list(map(int, actual))
+    selectedIndexes=[]
+    secondListCombinations = [list(comb) for longitud in range(1, len(actual) + 1) for comb in combinations(actual, longitud)]
+    firstListCombinations = [list(comb) for longitud in range(1, len(future) + 1) for comb in combinations(future, longitud)]
+    secondListCombinations.insert(0,[0])
+    firstListCombinations.insert(0,[0])
+    permutations = list(product(firstListCombinations, secondListCombinations))
+    half1 = permutations[:len(permutations)//2]
+    half2 = permutations[len(permutations)//2:]
+    matrix=[]
+    half2.reverse()
+    for i in range(0, len(half1)):
+        matrix.append([half1[i], half2[i]])
+    listA =[]
+    listB=[]
+    listC=[]
+    combMatrix = []
+    for row in matrix:
+        for lista in row:
+            for tupla in lista:
+                for index in tupla:
+                    listA.append(index)
+                listC.append(listA)
+                listA=[]
+            listB.append(listC)
+            listC=[]
+        combMatrix.append(listB)
+        listB=[]
+    selectedIndexes.append(future)
+    selectedIndexes.append(actual)
+    return combMatrix, selectedIndexes
 # Función para convertir los estados de las matrices
-def convertStates2(matrixState,listaindexs):
+def convertStates2(matrixState, listaindexs):
+    """
+    Converts the matrix state by performing the following steps:
+    1. Creates a deep copy of the matrix state.
+    2. Splits the copied matrix state into firstTitle, secondTitle, and content.
+    3. Converts the firstTitle and secondTitle using the provided listaindexs.
+    4. Converts the columns of the matrix by rearranging them based on the converted firstTitle and secondTitle.
+    
+    Args:
+        matrixState (list): The matrix state to be converted.
+        listaindexs (list): A list containing the indices for converting firstTitle and secondTitle.
+    
+    Returns:
+        tuple: A tuple containing the final converted firstTitle, secondTitle, and content.
+    """
     copiamatrixState = copy.deepcopy(matrixState)
     firstTitle, secondTitle, content = splitList(copiamatrixState)
-    firstTitle = convertTitles(firstTitle,listaindexs[0])
-    secondTitle = convertTitles(secondTitle,listaindexs[1])
-    finalFirstTitle, finalSecondTitle, finalContent= convertColumns(firstTitle,content,secondTitle)
-    return( finalFirstTitle, finalSecondTitle, finalContent)
-
+    firstTitle = convertTitles(firstTitle, listaindexs[0])
+    secondTitle = convertTitles(secondTitle, listaindexs[1])
+    finalFirstTitle, finalSecondTitle, finalContent = convertColumns(firstTitle, content, secondTitle)
+    return finalFirstTitle, finalSecondTitle, finalContent
 # Función para convertir los títulos de las matrices
-def convertTitles(titulo,selectedIndexes):
-        newMatrixo=[]
-        indexs=[]
-        if selectedIndexes[0]==0:
-             return selectedIndexes
-        if len(titulo[0])==len(selectedIndexes):
-            return titulo
-        for i in titulo:
-            for j in selectedIndexes:
-                indexs.append(i[j-1])
-            newMatrixo.append(indexs)
-            indexs=[]
-        return newMatrixo
+def convertTitles(titulo, selectedIndexes):
+    """
+    Converts the titles of a matrix based on the selected indexes.
 
+    Args:
+        titulo (list): The original matrix of titles.
+        selectedIndexes (list): The list of selected indexes.
+
+    Returns:
+        list: The new matrix of titles with selected indexes.
+
+    Example:
+        >>> titulo = [['A', 'B', 'C'], ['D', 'E', 'F'], ['G', 'H', 'I']]
+        >>> selectedIndexes = [1, 3]
+        >>> convertTitles(titulo, selectedIndexes)
+        [['A', 'C'], ['D', 'F'], ['G', 'I']]
+    """
+    newMatrixo = []
+    indexs = []
+    if selectedIndexes[0] == 0:
+        return selectedIndexes
+    if len(titulo[0]) == len(selectedIndexes):
+        return titulo
+    for i in titulo:
+        for j in selectedIndexes:
+            indexs.append(i[j-1])
+        newMatrixo.append(indexs)
+        indexs = []
+    return newMatrixo
 # Función para convertir las columnas de las matrices    
 def convertColumns(firstTitle,content, secondTitle):
+    """
+    Converts the columns of a table by rearranging the data based on the given firstTitle and secondTitle.
+
+    Args:
+        firstTitle (list): The list of first titles representing the original column order.
+        content (list): The list of content representing the table data.
+        secondTitle (list): The list of second titles representing the desired column order.
+
+    Returns:
+        list: The converted table data with columns rearranged based on the secondTitle.
+    """
     
     firstTitleCopy = []
     contentCopy = []
@@ -861,93 +1162,106 @@ def convertColumns(firstTitle,content, secondTitle):
                     rowcopia.append(row[count])
             count +=1
         return convertRows(secondTitle, contentCopy, firstTitleCopy)
-    
-# Función para convertir las columnas de las matrices    
-def convertColumns(firstTitle,content, secondTitle):
-    
-    firstTitleCopy = []
-    contentCopy = []
-    rowcopia = []
-    count = 0
-    if firstTitle[0]==0:
-        return sumColumns(firstTitle,content, secondTitle)
-    else:
-        for i in content:
-                contentCopy.append([])
-        while(count < len(firstTitle)):
-            if(firstTitle[count] in firstTitleCopy ):
-                index = firstTitleCopy.index(firstTitle[count])
-                for i in range(len(content)):
-                    row= content[i]
-                    rowcopia = contentCopy[i]
-                    rowcopia[index] = rowcopia[index]+row[count]
-            else:
-                firstTitleCopy.append(firstTitle[count])
-                for i in range (len(content)):
-                    row = content[i]
-                    rowcopia = contentCopy[i]
-                    rowcopia.append(row[count])
-            count +=1
-        return convertRows(secondTitle, contentCopy, firstTitleCopy)
-    
 # Función para convertir las filas de las matrices
-def convertRows(secondTitle,content, firstTitlefinal):
+def convertRows(secondTitle, content, firstTitlefinal):
+    """
+    Converts rows in the content based on the secondTitle and returns the modified content.
 
+    Parameters:
+    secondTitle (list): List of second titles.
+    content (list): List of content rows.
+    firstTitlefinal (str): First title.
+
+    Returns:
+    tuple: A tuple containing the firstTitlefinal, modified titleCopy, and modified contentCopy.
+    """
     titleCopy = []
     contentCopy = []
     count = 0
-    div=1
-    if secondTitle[0]==0:
-         return sumRows(secondTitle,content, firstTitlefinal)
+    div = 1
+    if secondTitle[0] == 0:
+        return sumRows(secondTitle, content, firstTitlefinal)
     else:
-         
-        while(count < len(secondTitle)):
-            if(secondTitle[count] in titleCopy):
-                if(secondTitle[count] == secondTitle[0] ):
+        while count < len(secondTitle):
+            if secondTitle[count] in titleCopy:
+                if secondTitle[count] == secondTitle[0]:
                     div += 1
                 index = titleCopy.index(secondTitle[count])
-                row=contentCopy[index]
-                secondRow=content[count]
-                contentCopy[index]= [(x + y) for x, y in zip(row, secondRow)]
-                
+                row = contentCopy[index]
+                secondRow = content[count]
+                contentCopy[index] = [(x + y) for x, y in zip(row, secondRow)]
             else:
                 titleCopy.append(secondTitle[count])
                 contentCopy.append(content[count])
-                
-            count +=1
-        for i in  range(len(contentCopy)):
+            count += 1
+        for i in range(len(contentCopy)):
             for j in range(len(contentCopy[i])):
-                contentCopy[i][j]/=div
-                contentCopy[i][j]=round(contentCopy[i][j],2)
-        return firstTitlefinal,titleCopy, contentCopy
-    
+                contentCopy[i][j] /= div
+                contentCopy[i][j] = round(contentCopy[i][j], 2)
+        return firstTitlefinal, titleCopy, contentCopy
 # Función para calcular la suma de las columnas de una matriz
 def sumColumns(firstTitle,content,secondTitle):
+    """
+    Sums the values in each column of the given content and returns the result as a list of rows.
+
+    Args:
+        firstTitle (str): The title of the first column.
+        content (list): The content containing the values in each column.
+        secondTitle (str): The title of the second column.
+
+    Returns:
+        list: The result of summing the values in each column, represented as a list of rows.
+    """
     suma_rows = []
     for row in content:
         suma_row = sum(row)
         suma_rows.insert(0,[suma_row]) 
     suma_rows.reverse()
     return convertRows(secondTitle,suma_rows, firstTitle)
-
 # Función para calcular la suma de las filas de una matriz
 def sumRows(secondTitle,content, firstTitlefinal):
+    """
+    Calculate the sum of each column in the content list and return the result.
 
+    Parameters:
+    secondTitle (str): The second title.
+    content (list): A list of lists representing the content.
+    firstTitlefinal (str): The first title.
+
+    Returns:
+    tuple: A tuple containing the first title, second title, and the sum of each column in the content list.
+    """
     div=len(content)
     content_total = [sum(column) for column in zip(*content)]
     content_total = [round(elemento / div,2) for elemento in content_total]
     return (firstTitlefinal,secondTitle, content_total)
-
-
 # Función para calcular el producto de Kronecker de una lista de matrices
 def kronecker_product_matrices(matrix_list):
+    """
+    Computes the Kronecker product of a list of matrices.
+
+    Args:
+        matrix_list (list): A list of matrices.
+
+    Returns:
+        matrix: The Kronecker product of the matrices in the list.
+    """
     result = matrix_list[0]
     for matrix in matrix_list[1:]:
         result = kronecker_product(result, matrix)
     return result
-
 # Función para calcular el producto de Kronecker de dos matrices
 def kronecker_product(A, B):
+    """
+    Computes the Kronecker product of two matrices A and B.
+
+    Parameters:
+    A (numpy.ndarray): The first matrix of shape (m, n).
+    B (numpy.ndarray): The second matrix of shape (p, q).
+
+    Returns:
+    numpy.ndarray: The Kronecker product of A and B, a matrix of shape (m * p, n * q).
+    """
     m, n = A.shape
     p, q = B.shape
 
@@ -960,9 +1274,18 @@ def kronecker_product(A, B):
                     result[i * p + k][j * q + l] = A[i, j] * B[k, l]
 
     return np.array(result)
-
 # Función para calcular la distancia EMD entre dos histogramas
 def earth_movers_distance(hist1, hist2):
+    """
+    Calculates the Earth Mover's Distance between two histograms.
+
+    Parameters:
+    hist1 (numpy.ndarray): The first histogram.
+    hist2 (numpy.ndarray): The second histogram.
+
+    Returns:
+    float: The Earth Mover's Distance between the two histograms.
+    """
     # Rellena el histograma más corto con ceros hasta que tenga la misma longitud que el histograma más largo
     if len(hist1) < len(hist2):
         hist1 = np.pad(hist1, (0, len(hist2) - len(hist1)), 'constant')
@@ -980,11 +1303,19 @@ def earth_movers_distance(hist1, hist2):
 
     # Redondear el resultado a 2 decimales
     return round(total_distance, 2)
-
-
-
+# Función para calcular la distancia EMD entre dos histogramas
 def DisEMD(matrixState,Eval1,Eval2):
-    
+    """
+    Calculates the Earth Mover's Distance (EMD) between two sets of evaluations.
+
+    Args:
+        matrixState (list): The matrix state.
+        Eval1 (list): The first set of evaluations.
+        Eval2 (list): The second set of evaluations.
+
+    Returns:
+        str: A string containing the minimum EMD and the corresponding combination.
+    """
 
     global matrix_strMD, filaAgraficarMD, min_histogramMD, filaAgraficarOMD
 
@@ -1076,10 +1407,16 @@ def DisEMD(matrixState,Eval1,Eval2):
 
 
     return (f"Menor distancia EMD: {min_emd}, Combinación correspondiente: {min_combinacion}")
-
-
+# Función para graficar el histograma original
 def graficarO():
+    """
+    Function to plot a bar graph.
 
+    This function checks if the required variables are defined and displays an error message if not.
+    It creates a figure and axes, and then plots a bar graph using the given data.
+    The y-axis labels are set to [0, 0.5, 1].
+    Finally, it displays the graph.
+    """
     # Comprobar si las variables están definidas
     if 'matrix_strMD' not in globals() or 'filaAgraficarOMD' not in globals():
         messagebox.showerror("Error", "Sin gráfica disponible, hallar la distancia EMD.")
@@ -1096,32 +1433,34 @@ def graficarO():
 
     # Muestra el gráfico
     plt.show()
-
+# Función para graficar el histograma ganador
 def graficarG():
-    # Comprobar si las variables están definidas
+    """
+    Plot the histogram corresponding to the shortest EMD distance.
+
+    Checks if the variables 'matrix_strMD', 'rowAgraficarMD' and 'min_histogramMD' are defined.
+    If any of these variables are not defined, it displays an error message and returns.
+
+    Create a shape and axes for the graph.
+    Draws the bar chart using the values of 'matrix_strMD' and 'min_histogramMD'.
+    Change the y-axis labels to [0, 0.5, 1].
+    Set the graph title to 'Histogram corresponding to the shortest EMD distance'.
+    Shows the graph.
+    """
     if 'matrix_strMD' not in globals() or 'filaAgraficarMD' not in globals() or 'min_histogramMD' not in globals():
         messagebox.showerror("Error", "Sin gráfica disponible, hallar la distancia EMD.")
         return
 
-    # Crea la figura y los ejes
     fig, ax = plt.subplots()
 
-    # Dibuja el gráfico de barras
     ax.bar(matrix_strMD, min_histogramMD, width=0.5, align='center')
 
-    # Cambia las etiquetas del eje y a [0, 0.5, 1]
     ax.set_yticks([0, 0.5, 1])
 
-    # Título del gráfico
     plt.title('Histograma correspondiente a la menor distancia EMD')
 
-    # Mostar el gráfico
     plt.show()
-
-
-
-#Funciones de cada opción
-
+# Funciones para hacer el llamado de cada función, asi que la documentación es la misma
 def Ingresar_B():
 
     def Crear_B():
@@ -1211,8 +1550,6 @@ def MatrizE_B():
         imprimir_tablaS(matrixOrE)
         matrixOrE[0].pop(0)
 
-
-
 def IngMatrizE_B():
 
     limpiar_frameTr()
@@ -1256,9 +1593,6 @@ def IngMatrizE_B():
 
     Subir_Button=tk.Button(frame_trabajo,image=icono_tk_opcion1, bg="#332F2C", fg="white", padx=5, pady=5, font=('Helvetica', 15),command=Cargar_ArchivoMatE)
     Subir_Button.place(relx=0.75,rely=0.5, anchor="center")       
-    
-  
-
 
 def Marginalizar_B():
     limpiar_frameTr()
@@ -1317,12 +1651,9 @@ def Marginalizar_B():
     Margi_Button=tk.Button(frame_trabajo,text="Marginzalizar", bg="#332F2C", fg="white", padx=5, pady=5, font=('Helvetica', 15),command=MargiP_B)
     Margi_Button.place(relx=0.65,rely=0.6, anchor="center")       
 
-
 def Grafica_B():
     limpiar_frameTr()
     graficar()
-    
-
 
 def DistanciaE_B():
     limpiar_frameTr()
@@ -1385,7 +1716,7 @@ def GraficaG_B():
     limpiar_frameTr()
     graficarG()
 
-#Otros datos importantes
+# Diccionaro para la conversión de letras a números
 diccionario_letras = {}
 for numero in range(1, 27):
     letra = chr(ord('A') + numero - 1)
