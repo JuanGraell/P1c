@@ -692,12 +692,12 @@ def channelState(matrix):
             channels = []
 
             for i in range(len(matrix)):
-                n = simpledialog.askinteger(title="Canal", prompt=f"¿Qué dato desea en el canal {i + 1} para la revisión?")
+                n = simpledialog.askinteger(parent=root, title="Canal", prompt=f"¿Qué dato desea en el canal {i + 1} para la revisión?")
                 while n != 0 and n != 1:
                     tk.messagebox.showerror("Error", "El estado solo acepta números binarios")
-                    n = simpledialog.askinteger(title="Canal", prompt=f"¿Qué dato desea en el canal {i + 1} para la revisión?")
+                    n = simpledialog.askinteger(parent=root, title="Canal", prompt=f"¿Qué dato desea en el canal {i + 1} para la revisión?")
                 channels.append(n)
-            t = simpledialog.askinteger(title="Estado", prompt="¿En qué estado siguiente t+n o previo t-n desea comparar los canales? (Ponga negativo para previos)")
+            t = simpledialog.askinteger(parent=root, title="Estado", prompt="¿En qué estado siguiente t+n o previo t-n desea comparar los canales? (Ponga negativo para previos)")
 
             stateChannelMatrix = createChannelMatrix(invertedStateMatrix)
 
@@ -752,7 +752,7 @@ def stateState(matrix):
     root = tk.Tk()
     root.withdraw()  # Para evitar que se muestre la ventana Tk vacía
 
-    t = simpledialog.askinteger("Input", "En qué estado siguiente t+n o previo t-n desea comparar los canales? (Ponga negativo para previos)")
+    t = simpledialog.askinteger(parent=root, title="Estado", prompt= "En qué estado siguiente t+n o previo t-n desea comparar los canales? (Ponga negativo para previos)")
 
     root.destroy()  # Destruir la ventana Tk después de obtener la entrada
 
@@ -1625,7 +1625,7 @@ def Marginalizar_B():
 
             # Check if the length of the characters entered does not exceed len(matrixSB[0][0]) plus the respective empty spaces for each entry
             if len(cp_estados) > len(matrixSB[0][0]) + cp_estados.count(' ') or len(cs_estados) > len(matrixSB[0][0]) + cs_estados.count(' '):
-                raise ValueError("La longitud de los caracteres ingresados no debe exceder la longitud de los canales de la matriz.")
+                raise ValueError("La longitud de los caracteres ingresados no debe exceder la longitud de los canales de la matriz")
 
             a = Marginalizar_MP(matrixSB, cp_estados, cs_estados)
             a[0].insert(0, "Estados")
@@ -1682,7 +1682,7 @@ def DistanciaE_B():
 
             # Check if the length of the characters entered does not exceed len(matrixSB[0][0])
             if len(cp_estados) > len(matrixSB[0][0]) or len(c_dato) > len(matrixSB[0][0]):
-                raise ValueError("La longitud de los caracteres ingresados no debe exceder la longitud de los canales de la matriz.")
+                raise ValueError("La longitud de los caracteres ingresados no debe exceder la longitud de los canales de la matriz, recuerde que en este caso no puede haber separación por espacios.")
 
             limpiar_frameTr()
             printo = DisEMD(matrixSB, cp_estados, c_dato)
